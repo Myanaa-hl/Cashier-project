@@ -3,6 +3,9 @@ import csv
 import time
 import ast
 
+#Login
+
+
 #Open_Orders
 def take_orders(menus, cart) :
     
@@ -108,7 +111,7 @@ def payment(cart, history) :
         print("-" * 38)
         print(f"{end:^{wide-2}}")
         
-        time_orders = time.strftime("%Y-%m-%d %H:%M")
+        time_orders = time.strftime("%Y-%m-%d")
         history.append({"date" : time_orders ,
                         "transaction_id" : transaction_id ,
                         "item" : cart.copy(),
@@ -244,7 +247,6 @@ def logout(history) :
         print()
         admin = float(input("Cash Di Kasir: "))
         print("=" * 45)
-        print(f": Cash di Aplikasi {inc:,.0f} Cash Di Kasir: {admin:,.0f}")
         gap = inc - admin
         print()
         print(f"Selisih Antara Aplikasi Dan Kasir {gap:,.0f}")

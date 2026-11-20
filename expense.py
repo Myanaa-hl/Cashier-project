@@ -41,7 +41,7 @@ def add_expense(exp, categories) :
             print("Tidak Boleh 0 Dan Kurang Dari 0!")
             continue
         
-        time_exp = time.strftime("%Y-%m-%d %H:%M")
+        time_exp = time.strftime("%Y-%m-%d")
         exp.append({"times" : time_exp  ,"expense" : ctg, "notes" : notes, "nominal" : nominal})
         
 def show_expense(exp) :
@@ -54,7 +54,11 @@ def show_expense(exp) :
     print(f"{'Expense Recap':^{wides-2}}")
     print("-" * wides)
     
-    
+    print(f"{'No':<3} {'Date':<10} {'Category':<10} {'Notes':<20} {'Subtotal':>11}")
+    print("-" * wides)
     for number, expense in enumerate(exp, 1) :
-        print(f"{number:<3}  {expense['times']:<10} {expense['expense']:<10} {expense['notes']:<20} : {expense['nominal']:>13,.0f}")
+        print(f"{number:<3} {expense['times']:<10} {expense['expense']:<10} {expense['notes']:<15} : {expense['nominal']:>12,.0f}")
         
+        st = 0 + expense['nominal'] 
+    print("-" * wides)
+    print(f"{'Total':<5} : {st:>52,.0f}")
