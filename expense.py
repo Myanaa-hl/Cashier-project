@@ -1,16 +1,16 @@
 import csv
+import time
 
+wides = 60
 def add_expense(exp, categories) :
     print()
     
-    wides = 60
     print("-" * wides)   
     print(f"{"Indigo's Expense":^{wides-2}}")
     print("-" * wides)
     print("FYI Ketik done Jika Selesai")
     print()
     while True :
-        
         
         ctg = input ("[Bahan, Karyawan, Operasional, Lainnya] Silahkan Pilih: ").strip().lower()
         if ctg == "done" :
@@ -41,7 +41,8 @@ def add_expense(exp, categories) :
             print("Tidak Boleh 0 Dan Kurang Dari 0!")
             continue
         
-        exp.append({"expense" : ctg, "notes" : notes, "nominal" : nominal})
+        time_exp = time.strftime("%Y-%m-%d %H:%M")
+        exp.append({"times" : time_exp  ,"expense" : ctg, "notes" : notes, "nominal" : nominal})
         
 def show_expense(exp) :
     
@@ -49,10 +50,11 @@ def show_expense(exp) :
         print("Belum Ada Data Yang Terisi!")
         return
     
-    print("-" * len(exp))
-    print(f"{'Expense Recap':^{len(exp)-2}}")
-    print("-" * len(exp))
-
+    print("-" * wides)
+    print(f"{'Expense Recap':^{wides-2}}")
+    print("-" * wides)
+    
+    
     for number, expense in enumerate(exp, 1) :
-        print(f"{number:<5} {expense['expense']:<10} {expense['notes']:<8} : {expense['nominal']:>10,.0f}")
+        print(f"{number:<3}  {expense['times']:<10} {expense['expense']:<10} {expense['notes']:<20} : {expense['nominal']:>13,.0f}")
         
