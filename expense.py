@@ -2,11 +2,15 @@ import csv
 
 def add_expense(exp, categories) :
     print()
-    print(f"{'Expense':^40}")
-    print("-" * 40)
-    print("FYI Ketik done Jika Selesai")
     
+    wides = 60
+    print("-" * wides)   
+    print(f"{"Indigo's Expense":^{wides-2}}")
+    print("-" * wides)
+    print("FYI Ketik done Jika Selesai")
+    print()
     while True :
+        
         
         ctg = input ("[Bahan, Karyawan, Operasional, Lainnya] Silahkan Pilih: ").strip().lower()
         if ctg == "done" :
@@ -50,4 +54,5 @@ def show_expense(exp) :
     print("-" * len(exp))
 
     for number, expense in enumerate(exp, 1) :
-        print(f"{number:<5} {expense['expense']:>10} {expense['notes']:>8} : {expense['nominal']:>10,.0f}")
+        print(f"{number:<5} {expense['expense']:<10} {expense['notes']:<8} : {expense['nominal']:>10,.0f}")
+        
