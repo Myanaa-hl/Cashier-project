@@ -56,31 +56,34 @@ def show_expense(exp, ex_hs) :
     print(f"{'Expense Recap':^{wides-2}}")
     print("-" * wides)
     
-    print(f"{'No':<3} {'Date':<10} {'Category':<10} {'Notes':<20} {'Subtotal':>11}")
+    print(f"{'No':<3} {'Date':<10} {'Category':<8} {'Notes':>22} {'Subtotal':>11}")
     print("-" * wides)
     for number, expense in enumerate(exp, 1) :
-        print(f"{number:<3} {expense['times']:<10} {expense['expense']:<10} {expense['notes']:<15} : {expense['nominal']:>12,.0f}")
+        print(f"{number:<3} {expense['times']:<10} {expense['expense']:<8} {expense['notes']:>22} : {expense['nominal']:>12,.0f}")
         
-        st = 0 + expense['nominal'] 
-        print("-" * wides)
-        print(f"{'Total':<5} : {st:>52,.0f}")
+    st = 0 + expense['nominal'] 
+    print("-" * wides)
+    print(f"{'Total':<5} : {st:>52,.0f}")
 
     ex_hs.append({"item" : exp, "amount" : st})
   
-    
-
+#exp load    
 ex_track = "expense.csv"
-fields = ["times", "expense", "notes", "nominal", "total"]
+fields = ["item", "amount"]
 def exp_load() :
     ex_hs = []
     
     try :
         with open(ex_track, "r", newline="") as file :
             for row in csv.DictReader(file) :
-                ex_hs.append({"item" : ast.literal_eval(row['item']), "amount" : row['amount']}) 
+                ex_hs.append({"item" : ast.literal_eval(row["item"]), "amount" : row['amount']}) 
             
     except FileNotFoundError :
         pass 
     return ex_hs
 
-
+def save_exp(exp) :
+    with open(ex_track, "w", newline="") as file :
+        writer = csv.DictWriter (file,fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(exp)

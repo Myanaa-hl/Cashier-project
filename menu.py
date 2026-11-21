@@ -47,6 +47,7 @@ def indigo_m (menus) :
         
         menus.append({"type" : "minuman", "name" : drink, "price" : drink_amount})
 
+#menu
 def show_menu(menus) :   
     
     if len(menus) == 0 :
@@ -74,8 +75,6 @@ def show_menu(menus) :
     for  menu in drinks :
         print(f"{number:<4}{menu['name']:<25} {menu['price']:>18,.0f}") 
         number += 1
-        
-    
 
 #save/load
 menus_track = "Menus.csv"
