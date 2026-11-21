@@ -75,10 +75,9 @@ def exp_load() :
     ex_hs = []
     
     try :
-        with open(ex_track, "r", newline="") as file
-        for row in csv.DictReader(file) :
-    
-            ex_hs.append({"item" : ast.literal_eval(row['item']), "amount" : row['amount']}) 
+        with open(ex_track, "r", newline="") as file :
+            for row in csv.DictReader(file) :
+                ex_hs.append({"item" : ast.literal_eval(row['item']), "amount" : row['amount']}) 
             
     except FileNotFoundError :
         pass 

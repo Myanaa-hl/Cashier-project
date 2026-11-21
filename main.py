@@ -1,6 +1,6 @@
 from menu import indigo_m, load, save
 from order import take_orders, show_cart, payment, hs_pay, history_load, history_save, income, logout
-from expense import add_expense, show_expense
+from expense import add_expense, show_expense, exp_load
 
 def main() :
     
@@ -10,6 +10,7 @@ def main() :
     sold = {}
     netty = {}
     exp = []
+    ex_hs = exp_load()
     categories = ['bahan', 'karyawan', 'operasional','lainnya']
 
     print()
@@ -45,7 +46,7 @@ def main() :
         elif customer == "6" :
             add_expense(exp, categories)
         elif customer == "7" :
-            show_expense(exp)
+            show_expense(exp, ex_hs)
         elif customer == "8" :
             income(history,sold,netty)
         elif customer == "9" :
