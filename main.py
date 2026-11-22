@@ -44,10 +44,11 @@ def main() :
             indigo_m(menus)
             save(menus)
         elif customer == "6" :
-            add_expense(exp, categories)
+            add_expense(exp, categories, ex_hs)
+            save_exp(ex_hs)
         elif customer == "7" :
             show_expense(exp, ex_hs)
-            save_exp(exp)
+            save_exp(ex_hs)
         elif customer == "8" :
             income(history,sold,netty)
         elif customer == "9" :
