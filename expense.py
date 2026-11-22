@@ -1,10 +1,10 @@
 import csv
 import time
-import ast
+
 
 wides = 60
 time_exp = time.strftime("%Y-%m-%d")
-def add_expense(exp, categories,ex_hs) :
+def add_expense(exp, categories) :
     print()
     
     print("-" * wides)   
@@ -14,7 +14,7 @@ def add_expense(exp, categories,ex_hs) :
     print()
     while True :
         
-        ctg = input ("[Bahan, Karyawan, Operasional, Lainnya] Silahkan Pilih: ").strip().lower()
+        ctg = input ("[Bahan, Karyawan, Keperluan, Lainnya] Silahkan Pilih: ").strip().lower()
         if ctg == "done" :
                 break
         elif ctg not in categories :
@@ -43,11 +43,9 @@ def add_expense(exp, categories,ex_hs) :
             print("Tidak Boleh 0 Dan Kurang Dari 0!")
             continue
         
+        exp.append({"times" : time_exp  ,"items" : ctg, "notes" : notes, "nominal" : nominal})
         
-        exp.append({"times" : time_exp  ,"expense" : ctg, "notes" : notes, "nominal" : nominal})
-        ex_hs.append({"times" : time_exp  ,"items" : ctg, "notes" : notes, "nominal" : nominal})
-        
-def show_expense(exp,ex_hs) :
+def show_expense(exp) :
     
     if len(exp) == 0 :
         print("Belum Ada Data Yang Terisi!")
@@ -61,37 +59,36 @@ def show_expense(exp,ex_hs) :
     print("-" * wides)
     st = 0
     for number, expense in enumerate(exp, 1) :
-        print(f"{number:<3} {expense['times']:<10} {expense['expense']:<8} {expense['notes']:>20} : {expense['nominal']:>13,.0f}")
+        print(f"{number:<3} {expense['times']:<8} {expense['items']:<10} {expense['notes']:>20} : {expense['nominal']:>13,.0f}")
         st += expense['nominal'] 
         
     print("-" * wides)
     print(f"{'Total':<5} : {st:>52,.0f}")
     
-    ex_hs.append({"total" : st})  
+    exp.append({"total" : st})  
 #exp load    
 ex_track = "expense.csv"
 fields = ["times","items", "notes", "nominal" ,"total"]
 def exp_load() :
-    ex_hs = []
+    exp = []
     
     try :
         with open(ex_track, "r", newline="") as file :
             for row in csv.DictReader(file) :
-                ex_hs.append({
+                exp.append({
                     "times" : row['times'],
                     "items" : row['items'],
                     "notes" : row['notes'],
                     "nominal" : row['nominal'],
                     "total" : row['total']
                     })
-            
     except FileNotFoundError :
         pass 
-    return ex_hs
+    return exp
 
-def save_exp(ex_hs) :
+def save_exp(exp) :
     with open(ex_track, "w", newline="") as file :
         writer = csv.DictWriter (file,fieldnames=fields)
         writer.writeheader()
-        writer.writerows(ex_hs)
+        writer.writerows(exp)
  

@@ -9,9 +9,8 @@ def main() :
     history = history_load()
     sold = {}
     netty = {}
-    exp = []
-    ex_hs = exp_load()
-    categories = ['bahan', 'karyawan', 'operasional','lainnya']
+    exp = exp_load()
+    categories = ['bahan', 'karyawan', 'keperluan','lainnya']
 
     print()
     print("=" * 10, "Indigo Restaurant", "=" * 10)
@@ -44,11 +43,10 @@ def main() :
             indigo_m(menus)
             save(menus)
         elif customer == "6" :
-            add_expense(exp, categories, ex_hs)
-            save_exp(ex_hs)
+            add_expense(exp, categories)
         elif customer == "7" :
-            show_expense(exp, ex_hs)
-            save_exp(ex_hs)
+            show_expense(exp)
+            save_exp(exp)
         elif customer == "8" :
             income(history,sold,netty)
         elif customer == "9" :
