@@ -50,7 +50,7 @@ def main() :
         elif customer == "8" :
             income(history,sold,netty,exp)
         elif customer == "9" :
-            logout(history)
+            logout(history,exp)
         else :
             print("Isi Sesuai Nomor Yang Ada")
             

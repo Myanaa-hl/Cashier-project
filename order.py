@@ -244,21 +244,26 @@ def income(history,sold,netty, exp) :
     print(f"Jumlah Terjual {min_am:>23}")
     print("-" * length)
     
-def logout(history) :
+def logout(history, exp) :
     
     inc = 0
     for rev in history :
         inc += rev['total']
-        
+    
+    out = 0
+    for cls in exp :
+        out += cls['nominal']
+    
+    cs = inc - out
     
     while True :
-        print(f"{'Closing':^33}")
+        print(f"{'Closing':^45}")
         print("-" * 45)
-        print(f"Cash Seharusnya : {inc:>16,.0f}")
+        print(f"Cash Seharusnya : {cs:>27,.0f}")
         print()
         admin = float(input("Cash Di Kasir: "))
         print("=" * 45)
-        gap = inc - admin
+        gap = cs - admin
         print()
         print(f"Selisih Antara Aplikasi Dan Kasir {gap:,.0f}")
         print("Jika Sudah Balance Lakukan Closeout")
