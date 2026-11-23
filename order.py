@@ -2,6 +2,7 @@ from menu import show_menu
 import csv
 import time
 import ast
+from expense import show_expense
 
 #Login
 
@@ -111,7 +112,7 @@ def payment(cart, history) :
         print("-" * 38)
         print(f"{end:^{wide-2}}")
         
-        time_orders = time.strftime("%Y-%m-%d")
+        time_orders = time.strftime("%Y-%m-%d %H:%M")
         history.append({"date" : time_orders ,
                         "transaction_id" : transaction_id ,
                         "item" : cart.copy(),
@@ -177,14 +178,17 @@ def history_save(history) :
         writer.writerows(history) 
 
 #Income
-def income(history,sold,netty) :
+def income(history,sold,netty, exp) :
 
     length = 38
     if len(history) == 0 :
         print("Belum Ada Penjualan Saat Ini")
         return
     
-    net = 0
+    for ex in show_expense(exp) :
+        for spent in ex['expense'] :
+            net = spent['st']
+    
     for transaction in history :
         net += transaction['total']
 
@@ -240,6 +244,7 @@ def logout(history) :
     for rev in history :
         inc += rev['total']
         
+    
     while True :
         print(f"{'Closing':^33}")
         print("-" * 45)

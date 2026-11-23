@@ -48,7 +48,7 @@ def main() :
             show_expense(exp)
             save_exp(exp)
         elif customer == "8" :
-            income(history,sold,netty)
+            income(history,sold,netty,exp)
         elif customer == "9" :
             logout(history)
         else :
