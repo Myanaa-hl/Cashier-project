@@ -185,12 +185,15 @@ def income(history,sold,netty, exp) :
         print("Belum Ada Penjualan Saat Ini")
         return
     
-    for ex in show_expense(exp) :
-        for spent in ex['expense'] :
-            net = spent['st']
-    
+    net = 0
+    for ex in exp :
+        net += ex['nominal'] 
+     
+    spent = 0
     for transaction in history :
-        net += transaction['total']
+        spent += transaction['total'] 
+
+    ss = spent - net
 
     for transaction in history :
         for item in transaction['item'] :
@@ -229,7 +232,10 @@ def income(history,sold,netty, exp) :
     print("-" * length)
     print(time.strftime ("%Y-%m-%d %H:%M"))
     print()
-    print(f"Total Pendapatan : {net:>19,.0f}")
+    print(f"Total Pendapatan : {spent:>19,.0f}")
+    print(f"Total Expense    : {net:19,.0f}")
+    print("-" * length)
+    print(f"Pendapatan Bersih: {ss:19,.0f}")
     print("-" * length)
     print(f"Menu Paling Laku {max_item.title():>21}")
     print(f"Jumlah Terjual {max_am:>23,.0f}")
